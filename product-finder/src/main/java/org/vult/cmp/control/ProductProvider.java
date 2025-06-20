@@ -9,5 +9,5 @@ import java.util.List;
 
 public interface ProductProvider {
     List<Category> getCategory(String url) throws IOException;
-    List<Product> getProduct(String url);
+    List<Product> getProduct(String url) throws IOException;
 }

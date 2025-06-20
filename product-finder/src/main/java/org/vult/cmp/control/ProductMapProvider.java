@@ -22,7 +22,7 @@ public class ProductMapProvider implements ProductProvider{
         String jsonString = Jsoup.connect(url).ignoreContentType(true).execute().body();
         Gson gson = new Gson();
         JsonObject json = gson.fromJson(jsonString, JsonObject.class);
-        JsonArray results = json.getAsJsonObject().getAsJsonArray("results");
+        JsonArray results = json.getAsJsonArray("results");
 
 
         for (int i = 0; i<results.size(); i++) {
@@ -41,8 +41,32 @@ public class ProductMapProvider implements ProductProvider{
         return categoryArrayList;
     }
 
-    public List<Product> getProduct(String url) {
+    public List<Product> getProduct(String url) throws IOException {
         ArrayList<Product> productArrayList = new ArrayList<>();
+        String jsonString = Jsoup.connect(url).ignoreContentType(true).execute().body();
+        Gson gson = new Gson();
+        JsonObject json = gson.fromJson(jsonString, JsonObject.class);
+        JsonArray jsonCategories = json.getAsJsonObject().getAsJsonArray("categories");
+
+        for (int i=0; i< jsonCategories.size(); i++) {
+            JsonObject jsonCat = jsonCategories.get(i).getAsJsonObject();
+            String name = jsonCat.get(JsonConstants.CATEGORY_NAME).getAsString();
+            int id = jsonCat.get(JsonConstants.CATEGORY_ID).getAsInt();
+            Category category = new Category(name,id);
+
+            JsonArray products = jsonCat.getAsJsonArray("products");
+            for (int j = 0; j< products.size();j++) {
+
+                JsonObject jsonProduct = products.get(j).getAsJsonObject();
+                String displayName = jsonProduct.get(JsonConstants.PRODUCT_NAME).getAsString();
+                JsonObject priceInstructions = jsonProduct.getAsJsonObject("price_instructions");
+                float unitPrice = Float.parseFloat(priceInstructions.get(JsonConstants.UNIT_PRICE).getAsString());
+
+                Product finalProduct = new Product(unitPrice,displayName,category);
+                productArrayList.add(finalProduct);
+            }
+        }
+
         return productArrayList;
     }
 }

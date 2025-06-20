@@ -1,6 +1,7 @@
 package org.vult.cmp.control;
 
 import org.vult.cmp.model.Category;
+import org.vult.cmp.model.Product;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -16,7 +17,13 @@ public class ProductController {
 
     public void execute(String url) throws IOException {
         List<Category> categories;
+        List<Product> products;
         categories = service.fetchCategories(url);
+
+        for (Category category: categories) {
+            products = service.fetchProductsByCategory(category);
+
+        }
 
     }
 }

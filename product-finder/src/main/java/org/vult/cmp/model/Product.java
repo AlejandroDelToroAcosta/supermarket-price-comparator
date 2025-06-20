@@ -1,23 +1,24 @@
 package org.vult.cmp.model;
 
 public class Product {
-    private String categories;
     private float unitPrice;
     private String displayName;
+    private Category category;
 
-    public Product(String categories, float unitPrice, String displayName) {
-        this.categories = categories;
+    public Product(float unitPrice, String displayName, Category category) {
         this.unitPrice = unitPrice;
         this.displayName = displayName;
+        this.category = category;
     }
 
-    public String getCategories() {
-        return categories;
+    public Category getCategory() {
+        return category;
     }
 
-    public void setCategories(String categories) {
-        this.categories = categories;
+    public void setCategory(Category category) {
+        this.category = category;
     }
+
 
     public float getUnitPrice() {
         return unitPrice;
@@ -38,9 +39,9 @@ public class Product {
     @Override
     public String toString() {
         return "Product{" +
-                "categories='" + categories + '\'' +
                 ", unitPrice=" + unitPrice +
                 ", displayName='" + displayName + '\'' +
+                ", category=" + category +
                 '}';
     }
 }

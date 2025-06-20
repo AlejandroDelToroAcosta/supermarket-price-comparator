@@ -4,6 +4,7 @@ import org.vult.cmp.model.Category;
 import org.vult.cmp.model.Product;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProductService {
@@ -18,8 +19,10 @@ public class ProductService {
         return provider.getCategory(url);
     }
 
-    public List<Product> fetchProductsByCategory(Category category) {
-        String url = "https://tienda.mercadona.es/api/categories/" + category.getId(); // ejemplo
-        return provider.getProduct(url);
+    public List<Product> fetchProductsByCategory(Category category) throws IOException {
+        List<Product> products;
+        String url = "https://tienda.mercadona.es/api/categories/" + category.getId();
+        products = provider.getProduct(url);
+        return products;
     }
 }
