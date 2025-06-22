@@ -2,6 +2,8 @@ package org.vult.cmp.control;
 
 import org.vult.cmp.model.Category;
 import org.vult.cmp.model.Product;
+import org.vult.cmp.datalake.DatalakeBuilderCSV;
+import org.vult.cmp.utils.Serialize;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -16,14 +18,28 @@ public class ProductController {
     }
 
     public void execute(String url) throws IOException {
-        List<Category> categories;
-        List<Product> products;
-        categories = service.fetchCategories(url);
+        List<Category> categories = service.fetchCategories(url);
+        List<Product> allProducts = new ArrayList<>();  // esta lista acumula todos los productos
 
-        for (Category category: categories) {
-            products = service.fetchProductsByCategory(category);
-
+        for (Category category : categories) {
+            List<Product> productsByCategory = service.fetchProductsByCategory(category);
+            allProducts.addAll(productsByCategory);  // acumulamos
+            System.out.println(productsByCategory);
         }
+
+        DatalakeBuilderCSV datalakeBuilderCSV = new DatalakeBuilderCSV();
+        String outputPath = "C:\\Users\\aadel\\Desktop\\GCID\\Tercero\\Segundo Cuatrimestre\\BDNR\\fitness-db\\market-comparator\\mercadona-data.csv";
+        datalakeBuilderCSV.write(allProducts, outputPath);
+
+
+        Serialize serialize = new Serialize();
+        for (Product product : allProducts) {
+            Double size = product.getUnitSize();
+            if (size == null || size.isNaN() || size.isInfinite()) {
+                product.setUnitSize(0.0);
+            }
+        }
+        serialize.serializeProducts(allProducts, "C:\\Users\\aadel\\Desktop\\GCID\\Tercero\\Segundo Cuatrimestre\\BDNR\\fitness-db\\market-comparator\\mercadona-data.json");
 
     }
 }
