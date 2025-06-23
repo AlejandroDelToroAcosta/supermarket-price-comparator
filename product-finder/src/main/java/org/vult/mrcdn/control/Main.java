@@ -1,4 +1,4 @@
-package org.vult.cmp.control;
+package org.vult.mrcdn.control;
 
 import java.io.IOException;
 public class Main {

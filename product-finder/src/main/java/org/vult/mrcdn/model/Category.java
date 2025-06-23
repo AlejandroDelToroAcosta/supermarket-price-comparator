@@ -1,4 +1,4 @@
-package org.vult.cmp.model;
+package org.vult.mrcdn.model;
 
 public class Category {
     private String name;

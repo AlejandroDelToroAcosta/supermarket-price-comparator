@@ -1,9 +1,9 @@
-package org.vult.cmp.utils;
+package org.vult.mrcdn.utils;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
-import org.vult.cmp.model.Product;
+import org.vult.mrcdn.model.Product;
 
 import java.io.*;
 import java.lang.reflect.Type;

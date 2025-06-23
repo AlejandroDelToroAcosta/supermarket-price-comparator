@@ -1,4 +1,4 @@
-package org.vult.cmp.utils;
+package org.vult.mrcdn.utils;
 
 public class JsonConstants {
 

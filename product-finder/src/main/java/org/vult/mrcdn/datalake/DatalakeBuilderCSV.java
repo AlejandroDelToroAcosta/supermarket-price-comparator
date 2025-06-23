@@ -1,6 +1,6 @@
-package org.vult.cmp.datalake;
+package org.vult.mrcdn.datalake;
 
-import org.vult.cmp.model.Product;
+import org.vult.mrcdn.model.Product;
 
 import java.io.*;
 

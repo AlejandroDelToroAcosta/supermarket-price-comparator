@@ -1,10 +1,9 @@
-package org.vult.cmp.control;
+package org.vult.mrcdn.control;
 
-import org.vult.cmp.model.Category;
-import org.vult.cmp.model.Product;
+import org.vult.mrcdn.model.Category;
+import org.vult.mrcdn.model.Product;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class ProductService {

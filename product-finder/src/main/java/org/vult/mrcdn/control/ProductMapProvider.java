@@ -1,4 +1,4 @@
-package org.vult.cmp.control;
+package org.vult.mrcdn.control;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -8,11 +8,11 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.Gson;
 
-import static org.vult.cmp.utils.JsonUtils.*;
-import org.vult.cmp.utils.HttpClient;
-import org.vult.cmp.utils.JsonConstants;
-import org.vult.cmp.model.Category;
-import org.vult.cmp.model.Product;
+import static org.vult.mrcdn.utils.JsonUtils.*;
+import org.vult.mrcdn.utils.HttpClient;
+import org.vult.mrcdn.utils.JsonConstants;
+import org.vult.mrcdn.model.Category;
+import org.vult.mrcdn.model.Product;
 
 public class ProductMapProvider implements ProductProvider{
 

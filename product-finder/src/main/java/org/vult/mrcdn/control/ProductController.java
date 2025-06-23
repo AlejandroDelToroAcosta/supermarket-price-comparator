@@ -1,9 +1,9 @@
-package org.vult.cmp.control;
+package org.vult.mrcdn.control;
 
-import org.vult.cmp.model.Category;
-import org.vult.cmp.model.Product;
-import org.vult.cmp.datalake.DatalakeBuilderCSV;
-import org.vult.cmp.utils.Serialize;
+import org.vult.mrcdn.model.Category;
+import org.vult.mrcdn.model.Product;
+import org.vult.mrcdn.datalake.DatalakeBuilderCSV;
+import org.vult.mrcdn.utils.Serialize;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -28,7 +28,7 @@ public class ProductController {
         }
 
         DatalakeBuilderCSV datalakeBuilderCSV = new DatalakeBuilderCSV();
-        String outputPath = "C:\\Users\\aadel\\Desktop\\GCID\\Tercero\\Segundo Cuatrimestre\\BDNR\\fitness-db\\market-comparator\\mercadona-data.csv";
+        String outputPath = "C:\\Users\\aadel\\Desktop\\GCID\\Tercero\\Segundo Cuatrimestre\\BDNR\\fitness-db\\market-comparator\\datalake\\mercadona-data.csv";
         datalakeBuilderCSV.write(allProducts, outputPath);
 
 
