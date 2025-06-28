@@ -11,7 +11,6 @@ import java.util.Locale;
 public class DatalakeBuilderCSV {
     public void write(List<Product> products, String filePath) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
-            // Cabecera
             writer.write("ProductId,DisplayName,UnitPrice,CategoryName,CategoryId,Format,UnitSize,Slug,Packaging,URL");
             writer.newLine();
 

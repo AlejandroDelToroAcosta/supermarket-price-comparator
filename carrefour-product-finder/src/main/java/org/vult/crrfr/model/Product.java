@@ -4,20 +4,25 @@ import kotlin.text.UStringsKt;
 
 public class Product {
     private String name;
-    private float price;
+    private double price;
     private String measureUnit;
     private String url;
     private String productId;
+    private Category category;
 
-    public Product(String name, float price, String measureUnit, String url, String productId) {
+    public Product(String name, double price, String measureUnit, String url, String productId, Category category) {
         this.name = name;
         this.price = price;
         this.measureUnit = measureUnit;
         this.url = url;
         this.productId = productId;
+        this.category = category;
     }
 
-    public void setPrice(float price) {
+    public double getPrice() {
+        return price;
+    }
+    public void setPrice(double price) {
         this.price = price;
     }
 
@@ -31,6 +36,14 @@ public class Product {
 
     public String getName() {
         return name;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
     public void setName(String name) {
@@ -62,6 +75,7 @@ public class Product {
                 ", measureUnit='" + measureUnit + '\'' +
                 ", url='" + url + '\'' +
                 ", productId='" + productId + '\'' +
+                ", category=" + category +
                 '}';
     }
 }
