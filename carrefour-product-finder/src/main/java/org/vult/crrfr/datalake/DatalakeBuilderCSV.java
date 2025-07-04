@@ -11,27 +11,26 @@ import java.util.List;
 import java.util.Locale;
 
 public class DatalakeBuilderCSV {
+
     public void write(List<Product> productList, String filePath) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
-            writer.write("DisplayName,UnitPrice,Unit,URL,ProductID,CategoryID");
-            writer.newLine();
+        try (
+                BufferedWriter writer = new BufferedWriter(new FileWriter(filePath));
+                CSVPrinter csvPrinter = new CSVPrinter(writer, CSVFormat.DEFAULT
+                        .withHeader("DisplayName", "UnitPrice", "Unit", "URL", "ProductID", "CategoryID"))
+        ) {
             for (Product p : productList) {
-                writer.write(String.format(Locale.US, "%s,%.2f,%s,%s,%s,%s\n",
-                        escapeCsv(p.getName()),
-                        p.getPrice(),
-                        escapeCsv(p.getMeasureUnit()),
-                        escapeCsv(p.getUrl()),
-                        escapeCsv(p.getProductId()),
-                        escapeCsv(p.getCategory().getCategoryID())
-                ));
+                csvPrinter.printRecord(
+                        p.getName(),
+                        String.format(Locale.US, "%.2f", p.getPrice()),
+                        p.getMeasureUnit(),
+                        p.getUrl(),
+                        p.getProductId(),
+                        p.getCategory().getCategoryID()
+                );
             }
+            csvPrinter.flush();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
-    private String escapeCsv(String value) {
-        if (value == null) return "Na";
-        return value.replace("\"", "\"\""); // duplica las comillas internas
-    }
-
 }

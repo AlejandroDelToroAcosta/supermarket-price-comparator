@@ -33,6 +33,7 @@ public class ProductService {
             try {
                 List<Product> productosCategoria = provider.getProduct(category);
                 products.addAll(productosCategoria);
+                System.out.println(productosCategoria);
 
             } catch (IOException e) {
                 System.err.println("Error en categoría: " + category.getUrl());
