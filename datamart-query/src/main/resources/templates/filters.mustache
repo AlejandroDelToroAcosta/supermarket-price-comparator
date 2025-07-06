@@ -1,0 +1,13 @@
+<h2>Resultados filtrados en '{{category}}'</h2>
+
+{{#productos}}
+    <div>
+        <strong>{{name}}</strong> - {{price}} €
+    </div>
+{{/productos}}
+
+{{^productos}}
+    <p>No se encontraron productos en esta categoría.</p>
+{{/productos}}
+
+<br><a href="/">Volver</a>

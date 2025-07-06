@@ -1,5 +1,7 @@
 package org.vult.sql.query;
 
+import org.vult.sql.model.ProductDTO;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -36,13 +38,13 @@ public class MercadonaQueryService {
         }
         return categories;
     }
-    public List<String> searchMercadonaByNameAndCategory(String keyword, String category) throws SQLException {
+    public List<ProductDTO> searchMercadonaByNameAndCategory(String keyword, String category) throws SQLException {
         String sql = """
         SELECT name, unit_price FROM mercadona_products
         WHERE LOWER(name) LIKE ? AND category_name = ?
     """;
+        List<ProductDTO> results = new ArrayList<>();
 
-        List<String> results = new ArrayList<>();
 
         try (Connection conn = connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -52,29 +54,31 @@ public class MercadonaQueryService {
             ResultSet rs = pstmt.executeQuery();
 
             while (rs.next()) {
-                results.add(rs.getString("name") + " - " + rs.getDouble("unit_price") + " €");
+                String name = rs.getString("name");
+                double price = rs.getDouble("unit_price");
+                results.add(new ProductDTO(name, price));
             }
         }
         return results;
     }
     // 3. Buscar productos por nombre (Mercadona)
-    public List<String> searchMercadonaByName(String keyword) throws SQLException {
-        String sql = """
-        SELECT name, unit_price FROM mercadona_products
-        WHERE LOWER(name) LIKE ?
-    """;
-        List<String> results = new ArrayList<>();
+    public List<ProductDTO> searchMercadonaProduct(String keyword) throws SQLException {
+        List<ProductDTO> results = new ArrayList<>();
+        String sql = "SELECT name, unit_price FROM mercadona_products WHERE name LIKE ?";
 
         try (Connection conn = connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
-            pstmt.setString(1, "%" + keyword.toLowerCase() + "%");
+            pstmt.setString(1, "%" + keyword + "%");
             ResultSet rs = pstmt.executeQuery();
 
             while (rs.next()) {
-                results.add(rs.getString("name") + " - " + rs.getDouble("unit_price") + " €");
+                String name = rs.getString("name");
+                double price = rs.getDouble("unit_price");
+                results.add(new ProductDTO(name, price));
             }
         }
+
         return results;
     }
 
