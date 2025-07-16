@@ -1,0 +1,155 @@
+/* General Reset */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f8f8f8;
+}
+
+/* Cabecera estilo barra */
+.navbar {
+    background-color: #d80000;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+/* Contenedor interno */
+.navbar-content {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Formulario de búsqueda */
+.search-form {
+    display: flex;
+    gap: 10px;
+    flex-grow: 1;
+}
+
+.search-form input[type="text"],
+.search-form select {
+    padding: 8px;
+    border: none;
+    border-radius: 4px;
+    flex-grow: 1;
+}
+
+/* Botones */
+.boton-buscar {
+    background-color: #ffffff;
+    color: #d80000;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.2s ease;
+}
+
+.boton-buscar:hover {
+    background-color: #eee;
+}
+
+.boton-guardados {
+    background-color: white;
+    color: #d80000;
+    padding: 8px 14px;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.boton-guardados:hover {
+    background-color: #f0f0f0;
+}
+
+/* Contenido principal */
+.contenido {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 0 20px;
+    text-align: center;
+.slideshow {
+  position: relative;
+  max-width: 800px;
+  margin: auto;
+  overflow: hidden;
+}
+
+.slides {
+  display: flex;
+  width: 200%; /* 100% por cada slide (2 slides = 200%) */
+  transition: transform 0.5s ease;
+}
+
+.slide {
+  width: 50%; /* Cada slide ocupa la mitad del contenedor (100%/2 slides) */
+}
+
+.slide img {
+  width: 100%;
+  display: block;
+}
+
+/* Oculta los radio buttons */
+input[type="radio"] {
+  display: none;
+}
+
+/* Cambia la posición según el radio seleccionado */
+#slide1:checked ~ .slides {
+  transform: translateX(0);
+}
+#slide2:checked ~ .slides {
+  transform: translateX(-50%);
+}
+
+/* Estilos para los puntos de navegación */
+.controls {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.dot {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  margin: 0 5px;
+  background: #ccc;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+/* Estilo para el punto activo */
+input[type="radio"]:checked + .dot {
+  background: #333;
+}
+
+/* Flechas de navegación (opcional) */
+.prev, .next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 24px;
+  cursor: pointer;
+  color: white;
+  background: rgba(0,0,0,0.5);
+  padding: 10px;
+  z-index: 1;
+}
+
+.prev { left: 10px; }
+.next { right: 10px; }

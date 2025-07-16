@@ -9,14 +9,18 @@ import spark.template.mustache.MustacheTemplateEngine;
 import java.util.*;
 
 public class Main {
+    // A nivel global, para guardar productos seleccionados temporalmente
+    private static final List<Map<String, Object>> productosGuardados = new ArrayList<>();
+
     public static void main(String[] args) {
-        // Estáticos: para css, imágenes, etc.
+
         staticFiles.location("/public");
         exception(Exception.class, (e, req, res) -> {
             e.printStackTrace(); // ✅ Verás el error real en consola
             res.status(500);
             res.body("Error interno del servidor: " + e.getMessage());
         });
+
 
 
         // Ruta principal con el formulario
@@ -62,6 +66,27 @@ public class Main {
             model.put("keyword", keyword);
 
             return new ModelAndView(model, "filters.mustache");
+        }, new MustacheTemplateEngine());
+
+        post("/guardar", (req, res) -> {
+            String name = req.queryParams("name");
+            String price = req.queryParams("price");
+
+            Map<String, Object> producto = new HashMap<>();
+            producto.put("name", name);
+            producto.put("price", price);
+
+            productosGuardados.add(producto);
+
+            // Redirigir de vuelta a la búsqueda o a una página de comparación
+            res.redirect("/guardados");
+            return null;
+        });
+
+        get("/guardados", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            model.put("productos", productosGuardados);
+            return new ModelAndView(model, "guardados.mustache"); // o usa HTML directamente si no usas mustache
         }, new MustacheTemplateEngine());
 
         get("/buscar", (req, res) -> {
@@ -115,6 +140,7 @@ public class Main {
 
             return new ModelAndView(model, "results.mustache");
         }, new MustacheTemplateEngine());
+
 
     }
 }

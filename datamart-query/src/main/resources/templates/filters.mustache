@@ -1,13 +1,17 @@
-<h2>Resultados filtrados en '{{category}}'</h2>
+<h2>Productos filtrados por '{{category}}' en {{market}}</h2>
 
-{{#productos}}
-    <div>
-        <strong>{{name}}</strong> - {{price}} €
-    </div>
-{{/productos}}
+<div class="tarjetas">
+    {{#productos}}
+        <div class="tarjeta">
+            <p><strong>{{name}}</strong></p>
+            <p>Precio: {{price}} €</p>
+            <form action="/guardar" method="post">
+                <input type="hidden" name="name" value="{{name}}">
+                <input type="hidden" name="price" value="{{price}}">
+                <button type="submit">Guardar</button>
+            </form>
+        </div>
+    {{/productos}}
+</div>
 
-{{^productos}}
-    <p>No se encontraron productos en esta categoría.</p>
-{{/productos}}
-
-<br><a href="/">Volver</a>
+<a href="/">Volver</a> |

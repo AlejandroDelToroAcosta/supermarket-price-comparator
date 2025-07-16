@@ -1,20 +1,12 @@
 <h2>Resultados para '{{keyword}}' en {{market}}</h2>
 
-{{#productos}}
-    <div>
-        <strong>{{name}}</strong> - {{price}} €
-    </div>
-{{/productos}}
-
-{{^productos}}
-    <p>No se encontraron productos.</p>
-{{/productos}}
-
-<h3>Filtrar por categoría:</h3>
+<h3>Selecciona una categoría:</h3>
 <ul>
     {{#categorias}}
-        <li><a href="{{url}}">{{name}}</a></li>
+        <li>
+            <a href="{{url}}">{{name}}</a>
+        </li>
     {{/categorias}}
 </ul>
 
-<br><a href="/">Volver</a>
+<a href="/">Volver</a>

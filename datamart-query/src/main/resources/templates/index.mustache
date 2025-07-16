@@ -1,19 +1,53 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-    <title>Buscador de productos</title>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="/styles.css">
+    <title>Buscador de productos</title>
+    <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
-<h1>Buscador de productos</h1>
-<form action="/buscar" method="get">
-    <input type="text" name="keyword" placeholder="Ej: leche" required>
-    <select name="market">
-        <option value="mercadona">Mercadona</option>
-        <option value="carrefour">Carrefour</option>
-    </select>
-    <button type="submit">Buscar</button>
-</form>
+<header class="navbar">
+    <div class="navbar-content">
+        <form action="/buscar" method="get" class="search-form">
+            <input type="text" name="keyword" placeholder="Buscar producto..." required>
+            <select name="market">
+                <option value="mercadona">Mercadona</option>
+                <option value="carrefour">Carrefour</option>
+            </select>
+            <button type="submit" class="boton-buscar">Buscar</button>
+        </form>
+        <a href="/guardados" class="boton-guardados">Ver guardados</a>
+    </div>
+</header>
+
+<div class="slideshow">
+    <!-- Radio buttons ocultos para controlar los slides -->
+    <input type="radio" name="slider" id="slide1" checked>
+    <input type="radio" name="slider" id="slide2">
+
+    <!-- Contenedor de slides -->
+    <div class="slides">
+        <div class="slide">
+            <img src="/images/logo-carrefour.jpg" alt="Imagen 1">
+        </div>
+        <div class="slide">
+            <img src="/images/mercadona-logo.jpg" alt="Imagen 2">
+        </div>
+    </div>
+
+    <!-- Controles de navegación -->
+    <div class="controls">
+        <label for="slide1" class="dot"></label>
+        <label for="slide2" class="dot"></label>
+    </div>
+
+    <!-- Flechas de navegación (opcional) -->
+    <label for="slide1" class="prev">‹</label>
+    <label for="slide2" class="next">›</label>
+</div>
+<main class="contenido">
+    <h2>Bienvenido al comparador de productos</h2>
+    <p>Utiliza el buscador superior para encontrar productos los supermercados más grandes de España.</p>
+</main>
 </body>
 </html>
