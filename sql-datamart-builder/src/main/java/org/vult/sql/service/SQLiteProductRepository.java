@@ -7,7 +7,6 @@ import org.vult.sql.schema.SQLSchema;
 import java.sql.*;
 import java.util.List;
 
-import static javax.management.remote.JMXConnectorFactory.connect;
 
 public class SQLiteProductRepository {
 
@@ -32,8 +31,8 @@ public class SQLiteProductRepository {
         String sql = """
                     INSERT OR REPLACE INTO mercadona_products (
                         product_id, name, unit_price, category_name, category_id, 
-                        format, unit_size, slug, packaging, url
-                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                        format, unit_size, slug, packaging, url, supermarket
+                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                 """;
 
         try (Connection conn = connect();
@@ -49,6 +48,7 @@ public class SQLiteProductRepository {
                 pstmt.setString(8, p.getSlug());
                 pstmt.setString(9, p.getPackaging());
                 pstmt.setString(10, p.getUrl());
+                pstmt.setString(11,p.getMarketName());
                 pstmt.addBatch();
             }
             pstmt.executeBatch();
@@ -58,8 +58,8 @@ public class SQLiteProductRepository {
     public void insertCarrefourProducts(List<CarrefourProduct> products, String tableName) throws SQLException {
         String sql = String.format("""
             INSERT OR REPLACE INTO %s 
-            (product_id, name, unit_price, unit, url, category_id, category)
-            VALUES (?, ?, ?, ?, ?, ?, ?)
+            (product_id, name, unit_price, unit, url, category_id, category, supermarket)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?)
         """, tableName);
 
         try (Connection conn = connect();
@@ -72,6 +72,7 @@ public class SQLiteProductRepository {
                 pstmt.setString(5, p.getUrl());
                 pstmt.setString(6, p.getCategoryID());
                 pstmt.setString(7, p.getCategory());
+                pstmt.setString(8,p.getMarketName());
                 pstmt.addBatch();
             }
             pstmt.executeBatch();

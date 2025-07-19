@@ -22,13 +22,13 @@ public class CarrefourQueryService {
     // 🔍 Buscar productos por nombre
     public List<ProductDTO> searchCarrefourByName(String keyword) throws SQLException {
         List<ProductDTO> results = new ArrayList<>();
-        String sql = "SELECT name, unit_price FROM carrefour_products WHERE name LIKE ?";
+        String sql = "SELECT name, unit_price, supermarket FROM carrefour_products WHERE name LIKE ?";
         try (Connection conn = connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, "%" + keyword + "%");
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
-                results.add(new ProductDTO(rs.getString("name"), rs.getDouble("unit_price")));
+                results.add(new ProductDTO(rs.getString("name"), rs.getDouble("unit_price"), rs.getString("supermarket")));
             }
         }
         return results;
@@ -60,7 +60,7 @@ public class CarrefourQueryService {
     public List<ProductDTO> searchCarrefourByNameAndCategory(String keyword, String category) throws SQLException {
         List<ProductDTO> results = new ArrayList<>();
         String sql = """
-            SELECT name, unit_price FROM carrefour_products
+            SELECT name, unit_price, supermarket FROM carrefour_products
             WHERE LOWER(name) LIKE ? AND category = ?
         """;
 
@@ -72,7 +72,7 @@ public class CarrefourQueryService {
             ResultSet rs = pstmt.executeQuery();
 
             while (rs.next()) {
-                results.add(new ProductDTO(rs.getString("name"), rs.getDouble("unit_price")));
+                results.add(new ProductDTO(rs.getString("name"), rs.getDouble("unit_price"), rs.getString("supermarket")));
 
             }
         }

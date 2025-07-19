@@ -1,6 +1,7 @@
 package org.vult.api.service;
 import static spark.Spark.*;
 
+import org.vult.sql.model.MercadonaProductDTO;
 import org.vult.sql.query.CarrefourQueryService;
 import org.vult.sql.query.MercadonaQueryService;
 import spark.ModelAndView;
@@ -42,6 +43,10 @@ public class Main {
                         Map<String, Object> item = new HashMap<>();
                         item.put("name", p.getName());
                         item.put("price", p.getPrice());
+                        item.put("supermarket", p.getMarketName());
+                        if (p instanceof MercadonaProductDTO mercadonaProd) {
+                            item.put("unitSize", mercadonaProd.getUnitSize());
+                        }
                         productos.add(item);
                     }
                 } else {
@@ -50,6 +55,7 @@ public class Main {
                         Map<String, Object> item = new HashMap<>();
                         item.put("name", p.getName());
                         item.put("price", p.getPrice());
+                        item.put("supermarket", p.getMarketName());
                         productos.add(item);
                     }
                 }
@@ -71,14 +77,20 @@ public class Main {
         post("/guardar", (req, res) -> {
             String name = req.queryParams("name");
             String price = req.queryParams("price");
+            String marketName = req.queryParams("supermarket");
+            String unitSize = req.queryParams("unitSize"); // puede ser null
 
             Map<String, Object> producto = new HashMap<>();
             producto.put("name", name);
             producto.put("price", price);
+            producto.put("supermarket", marketName);
+
+            if (unitSize != null && !unitSize.isEmpty()) {
+                producto.put("unitSize", unitSize);
+            }
 
             productosGuardados.add(producto);
 
-            // Redirigir de vuelta a la búsqueda o a una página de comparación
             res.redirect("/guardados");
             return null;
         });
@@ -86,7 +98,7 @@ public class Main {
         get("/guardados", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
             model.put("productos", productosGuardados);
-            return new ModelAndView(model, "guardados.mustache"); // o usa HTML directamente si no usas mustache
+            return new ModelAndView(model, "guardados.mustache");
         }, new MustacheTemplateEngine());
 
         get("/buscar", (req, res) -> {
@@ -103,6 +115,8 @@ public class Main {
                         Map<String, Object> item = new HashMap<>();
                         item.put("name", p.getName());
                         item.put("price", p.getPrice());
+                        item.put("supermarket", p.getMarketName());
+
                         productos.add(item);
                     }
                     categorias = new MercadonaQueryService("C:\\Users\\aadel\\Desktop\\GCID\\Tercero\\Segundo Cuatrimestre\\BDNR\\fitness-db\\market-comparator\\database.db").getCategoriesForNameSearch_Mercadona(keyword);
@@ -112,6 +126,8 @@ public class Main {
                         Map<String, Object> item = new HashMap<>();
                         item.put("name", p.getName());
                         item.put("price", p.getPrice());
+                        item.put("supermarket", p.getMarketName());
+
                         productos.add(item);
                     }
                     categorias = new CarrefourQueryService("C:\\Users\\aadel\\Desktop\\GCID\\Tercero\\Segundo Cuatrimestre\\BDNR\\fitness-db\\market-comparator\\database.db").getCategoriesForNameSearch_Carrefour(keyword);

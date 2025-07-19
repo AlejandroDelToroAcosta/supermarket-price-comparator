@@ -9,8 +9,9 @@ public class CarrefourProduct {
     private String productId;
     private String categoryID;
     private String category;
+    private String marketName;
 
-    public CarrefourProduct(String name, double price, String measureUnit, String url, String productId, String categoryID, String category) {
+    public CarrefourProduct(String name, double price, String measureUnit, String url, String productId, String categoryID, String category, String marketName) {
         this.name = name;
         this.price = price;
         this.measureUnit = measureUnit;
@@ -18,6 +19,7 @@ public class CarrefourProduct {
         this.productId = productId;
         this.categoryID = categoryID;
         this.category = category;
+        this.marketName = marketName;
     }
 
     public String getCategoryID() {
@@ -76,6 +78,14 @@ public class CarrefourProduct {
         this.url = url;
     }
 
+    public String getMarketName() {
+        return marketName;
+    }
+
+    public void setMarketName(String marketName) {
+        this.marketName = marketName;
+    }
+
     @Override
     public String toString() {
         return "CarrefourProduct{" +
@@ -86,6 +96,7 @@ public class CarrefourProduct {
                 ", productId='" + productId + '\'' +
                 ", categoryID='" + categoryID + '\'' +
                 ", category='" + category + '\'' +
+                ", marketName='" + marketName + '\'' +
                 '}';
     }
 }

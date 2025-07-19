@@ -11,8 +11,9 @@ public class MercadonaProduct {
     private String slug;
     private String packaging;
     private String url;
+    private String marketName;
 
-    public MercadonaProduct(String productId, String displayName, double unitPrice, String categoryName, String categoryId, String format, String unitSize, String slug, String packaging, String url) {
+    public MercadonaProduct(String productId, String displayName, double unitPrice, String categoryName, String categoryId, String format, String unitSize, String slug, String packaging, String url, String marketName) {
         this.productId = productId;
         this.displayName = displayName;
         this.unitPrice = unitPrice;
@@ -23,6 +24,15 @@ public class MercadonaProduct {
         this.slug = slug;
         this.packaging = packaging;
         this.url = url;
+        this.marketName = marketName;
+    }
+
+    public String getMarketName() {
+        return marketName;
+    }
+
+    public void setMarketName(String marketName) {
+        this.marketName = marketName;
     }
 
     public String getProductId() {
@@ -105,6 +115,7 @@ public class MercadonaProduct {
         this.url = url;
     }
 
+
     @Override
     public String toString() {
         return "MercadonaProduct{" +
@@ -118,6 +129,7 @@ public class MercadonaProduct {
                 ", slug='" + slug + '\'' +
                 ", packaging='" + packaging + '\'' +
                 ", url='" + url + '\'' +
+                ", marketName='" + marketName + '\'' +
                 '}';
     }
 }

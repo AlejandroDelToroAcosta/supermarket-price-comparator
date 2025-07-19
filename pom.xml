@@ -12,7 +12,7 @@
         <module>product-finder</module>
         <module>carrefour-product-finder</module>
         <module>sql-datamart-builder</module>
-        <module>datamart-query</module>
+        <module>datamart-query-engine</module>
 
     </modules>
 

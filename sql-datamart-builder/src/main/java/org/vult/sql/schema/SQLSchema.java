@@ -9,7 +9,8 @@ public class SQLSchema {
         unit TEXT,
         url TEXT,
         category_id TEXT,
-        category TEXT
+        category TEXT,
+        supermarket TEXT
     );
     """;
 
@@ -24,7 +25,8 @@ public class SQLSchema {
         unit_size TEXT,
         slug TEXT,
         packaging TEXT,
-        url TEXT
+        url TEXT,
+        supermarket TEXT
     );
     """;
 }

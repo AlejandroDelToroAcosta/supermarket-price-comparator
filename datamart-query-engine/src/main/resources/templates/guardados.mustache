@@ -14,18 +14,18 @@
 
 <main class="contenido">
     <h2>Productos guardados</h2>
-    <h2>Productos guardados</h2>
 
     {{#productos}}
-        <div class="card-container">
-            {{#productos}}
-                <div class="producto-card">
-                    <h3>{{name}}</h3>
-                    <p class="precio">{{price}} €</p>
-                </div>
-            {{/productos}}
+        <div class="producto-card">
+            <h3>{{name}}</h3>
+            <p class="precio">{{price}} €</p>
+            <p>Supermercado: {{supermarket}}</p>
+            {{#unitSize}}
+                <p>Tamaño: {{unitSize}}</p>
+            {{/unitSize}}
         </div>
     {{/productos}}
+
 
     {{^productos}}
         <p class="mensaje-vacio">No hay productos guardados aún.</p>

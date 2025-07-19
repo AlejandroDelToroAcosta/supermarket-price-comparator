@@ -1,5 +1,6 @@
 package org.vult.sql.query;
 
+import org.vult.sql.model.MercadonaProductDTO;
 import org.vult.sql.model.ProductDTO;
 
 import java.sql.*;
@@ -40,7 +41,7 @@ public class MercadonaQueryService {
     }
     public List<ProductDTO> searchMercadonaByNameAndCategory(String keyword, String category) throws SQLException {
         String sql = """
-        SELECT name, unit_price FROM mercadona_products
+        SELECT name, unit_price, supermarket, unit_size FROM mercadona_products
         WHERE LOWER(name) LIKE ? AND category_name = ?
     """;
         List<ProductDTO> results = new ArrayList<>();
@@ -56,15 +57,16 @@ public class MercadonaQueryService {
             while (rs.next()) {
                 String name = rs.getString("name");
                 double price = rs.getDouble("unit_price");
-                results.add(new ProductDTO(name, price));
+                String marketName = rs.getString("supermarket");
+                double size = rs.getDouble("unit_size");
+                results.add(new MercadonaProductDTO(name, price, marketName,size));
             }
         }
         return results;
     }
-    // 3. Buscar productos por nombre (Mercadona)
     public List<ProductDTO> searchMercadonaProduct(String keyword) throws SQLException {
         List<ProductDTO> results = new ArrayList<>();
-        String sql = "SELECT name, unit_price FROM mercadona_products WHERE name LIKE ?";
+        String sql = "SELECT name, unit_price, supermarket, unit_size FROM mercadona_products WHERE name LIKE ?";
 
         try (Connection conn = connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -75,7 +77,9 @@ public class MercadonaQueryService {
             while (rs.next()) {
                 String name = rs.getString("name");
                 double price = rs.getDouble("unit_price");
-                results.add(new ProductDTO(name, price));
+                double size = rs.getDouble("unit_size");
+                String marketName = rs.getString("supermarket");
+                results.add(new MercadonaProductDTO(name, price, marketName,size));
             }
         }
 

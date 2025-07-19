@@ -31,7 +31,8 @@ public class CSVReader {
                         record.get("UnitSize"),
                         record.get("Slug"),
                         record.get("Packaging"),
-                        record.get("URL")
+                        record.get("URL"),
+                        record.get("Supermarket")
                 );
                 products.add(p);
             }
@@ -52,7 +53,8 @@ public class CSVReader {
                         record.get("URL"),
                         record.get("ProductID"),
                         record.get("CategoryID"),
-                        record.get("Category")
+                        record.get("Category"),
+                        record.get("Supermarket")
                 );
                 products.add(p);
             }

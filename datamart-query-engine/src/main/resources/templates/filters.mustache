@@ -21,9 +21,21 @@
             <div class="producto-card">
                 <h3>{{name}}</h3>
                 <p class="precio">{{price}} €</p>
+                <p>Supermercado: {{supermarket}}</p>
+                {{#unitSize}}
+                    <p>Tamaño: {{unitSize}}</p>
+                {{/unitSize}}
+
+
                 <form action="/guardar" method="post">
                     <input type="hidden" name="name" value="{{name}}">
                     <input type="hidden" name="price" value="{{price}}">
+                    <input type="hidden" name="supermarket" value="{{supermarket}}">
+
+                    {{#unitSize}}
+                        <input type="hidden" name="unitSize" value="{{unitSize}}">
+                    {{/unitSize}}
+
                     <button type="submit" class="boton-guardar">Guardar</button>
                 </form>
             </div>

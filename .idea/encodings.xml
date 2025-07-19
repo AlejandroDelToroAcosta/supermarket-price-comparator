@@ -7,8 +7,8 @@
     <file url="file://$PROJECT_DIR$/carrefour-product-finder/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/common/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/common/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/datamart-query/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/datamart-query/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/datamart-query-engine/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/datamart-query-engine/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/mock/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/mock/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/product-finder/src/main/java" charset="UTF-8" />
