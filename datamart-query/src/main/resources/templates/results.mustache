@@ -1,12 +1,26 @@
-<h2>Resultados para '{{keyword}}' en {{market}}</h2>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Categorías para '{{keyword}}'</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+<header class="navbar">
+    <div class="navbar-content">
+        <a href="/" class="boton-volver">Volver</a>
+        <a href="/guardados" class="boton-guardados">Ver guardados</a>
+    </div>
+</header>
 
-<h3>Selecciona una categoría:</h3>
-<ul>
-    {{#categorias}}
-        <li>
-            <a href="{{url}}">{{name}}</a>
-        </li>
-    {{/categorias}}
-</ul>
+<main class="contenido">
+    <h2>Categorías disponibles para '{{keyword}}' en {{market}}</h2>
 
-<a href="/">Volver</a>
+    <div class="categoria-container">
+        {{#categorias}}
+            <a class="categoria-link" href="{{url}}">{{name}}</a>
+        {{/categorias}}
+    </div>
+</main>
+</body>
+</html>

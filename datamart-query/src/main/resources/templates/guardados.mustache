@@ -1,8 +1,36 @@
-<h2>Productos guardados</h2>
-<ul>
-    {{#productos}}
-        <li>{{name}} - {{price}} €</li>
-    {{/productos}}
-</ul>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Productos guardados</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+<header class="navbar">
+    <div class="navbar-content">
+        <a href="/" class="boton-volver">Volver al inicio</a>
+    </div>
+</header>
 
-<a href="/">Volver</a>
+<main class="contenido">
+    <h2>Productos guardados</h2>
+    <h2>Productos guardados</h2>
+
+    {{#productos}}
+        <div class="card-container">
+            {{#productos}}
+                <div class="producto-card">
+                    <h3>{{name}}</h3>
+                    <p class="precio">{{price}} €</p>
+                </div>
+            {{/productos}}
+        </div>
+    {{/productos}}
+
+    {{^productos}}
+        <p class="mensaje-vacio">No hay productos guardados aún.</p>
+    {{/productos}}
+
+</main>
+</body>
+</html>

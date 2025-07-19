@@ -153,3 +153,71 @@ input[type="radio"]:checked + .dot {
 
 .prev { left: 10px; }
 .next { right: 10px; }
+
+.categoria-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.categoria-link {
+    padding: 12px 18px;
+    background-color: #f2f2f2;
+    border-radius: 8px;
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    border: 1px solid #ddd;
+    transition: background-color 0.2s ease;
+}
+
+.categoria-link:hover {
+    background-color: #e0e0e0;
+}
+.card-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 30px;
+}
+
+.producto-card {
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.2s ease;
+}
+
+.producto-card:hover {
+    transform: translateY(-5px);
+}
+
+.producto-card h3 {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+}
+
+.precio {
+    color: #009900;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.boton-guardar {
+    background-color: rgb(216,0,0);
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+}
+
+.boton-guardar:hover {
+    opacity: 0.8;
+}
