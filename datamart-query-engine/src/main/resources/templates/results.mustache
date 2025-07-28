@@ -2,25 +2,56 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Categorías para '{{keyword}}'</title>
+    <title>Resultados para "{{keyword}}"</title>
     <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
 <header class="navbar">
-    <div class="navbar-content">
-        <a href="/" class="boton-volver">Volver</a>
-        <a href="/guardados" class="boton-guardados">Ver guardados</a>
-    </div>
+    <a href="/" class="boton-volver">Volver</a>
+    <a href="/guardados" class="boton-guardados">Ver guardados</a>
 </header>
 
 <main class="contenido">
-    <h2>Categorías disponibles para '{{keyword}}' en {{market}}</h2>
+    <h2>Resultados para "{{keyword}}"</h2>
 
-    <div class="categoria-container">
-        {{#categorias}}
-            <a class="categoria-link" href="{{url}}">{{name}}</a>
-        {{/categorias}}
-    </div>
+    {{#supermercados}}
+        <section class="fila-supermercado">
+            <h3>{{nombre}}</h3>
+            <div class="carrusel-container">
+                <button class="carrusel-flecha izquierda" onclick="scrollCarrusel('{{id}}', -1)">&#10094;</button>
+                <div id="{{id}}" class="carrusel">
+                    {{#productos}}
+                        <div class="producto-card">
+                            <h4>{{name}}</h4>
+                            <p class="precio">{{price}} €</p>
+                            {{#unitSize}}
+                                <p>Tamaño: {{unitSize}} g</p>
+                            {{/unitSize}}
+                            <form action="/guardar" method="post">
+                                <input type="hidden" name="name" value="{{name}}">
+                                <input type="hidden" name="price" value="{{price}}">
+                                <input type="hidden" name="supermarket" value="{{supermarket}}">
+                                {{#unitSize}}
+                                    <input type="hidden" name="unitSize" value="{{unitSize}}">
+                                {{/unitSize}}
+                                <button type="submit" class="boton-guardar">Guardar</button>
+                            </form>
+                        </div>
+                    {{/productos}}
+                </div>
+                <button class="carrusel-flecha derecha" onclick="scrollCarrusel('{{id}}', 1)">&#10095;</button>
+            </div>
+        </section>
+    {{/supermercados}}
+
 </main>
+
+<script>
+    function scrollCarrusel(id, direction) {
+        const container = document.getElementById(id);
+        const scrollAmount = 300;
+        container.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
+    }
+</script>
 </body>
 </html>

@@ -75,8 +75,30 @@ body {
 .boton-guardados:hover {
     background-color: #f0f0f0;
 }
+.categoria-selector {
+    margin-bottom: 10px;
+}
+.categoria-selector select {
+    padding: 8px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
 
-/* Contenido principal */
+
+.categoria-filtro {
+    display: inline-block;
+    margin: 5px;
+    padding: 6px 12px;
+    background: #f4f4f4;
+    border-radius: 8px;
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    transition: 0.3s;
+}
+.categoria-filtro:hover {
+    background: #ddd;
+}
 .contenido {
     max-width: 800px;
     margin: 40px auto;
@@ -220,4 +242,47 @@ input[type="radio"]:checked + .dot {
 
 .boton-guardar:hover {
     opacity: 0.8;
+}
+
+.fila-supermercado {
+    margin-bottom: 30px;
+}
+
+.carrusel-container {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.carrusel {
+    display: flex;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    gap: 16px;
+    padding: 10px 0;
+}
+
+.carrusel::-webkit-scrollbar {
+    display: none;
+}
+
+.carrusel-flecha {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    font-size: 24px;
+    padding: 8px;
+    cursor: pointer;
+    border-radius: 50%;
+    margin: 0 8px;
+}
+
+.producto-card {
+    flex: 0 0 auto;
+    width: 200px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+    background-color: #fff;
+    text-align: center;
 }

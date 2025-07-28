@@ -10,7 +10,6 @@ import spark.template.mustache.MustacheTemplateEngine;
 import java.util.*;
 
 public class Main {
-    // A nivel global, para guardar productos seleccionados temporalmente
     private static final List<Map<String, Object>> productosGuardados = new ArrayList<>();
 
     public static void main(String[] args) {
@@ -103,35 +102,55 @@ public class Main {
 
         get("/buscar", (req, res) -> {
             String keyword = req.queryParams("keyword");
-            String market = req.queryParams("market");
 
-            List<Map<String, Object>> productos = new ArrayList<>();
-            Set<String> categorias = new HashSet<>();
+            List<Map<String, Object>> mercadonaProductos = new ArrayList<>();
+            List<Map<String, Object>> carrefourProductos = new ArrayList<>();
+            List<Map<String, Object>> mercadonaCategoriasModel = new ArrayList<>();
+            List<Map<String, Object>> carrefourCategoriasModel = new ArrayList<>();
 
             try {
-                if ("mercadona".equalsIgnoreCase(market)) {
-                    var results = new MercadonaQueryService("C:\\Users\\aadel\\Desktop\\GCID\\Tercero\\Segundo Cuatrimestre\\BDNR\\fitness-db\\market-comparator\\database.db").searchMercadonaProduct(keyword);
-                    for (var p : results) {
-                        Map<String, Object> item = new HashMap<>();
-                        item.put("name", p.getName());
-                        item.put("price", p.getPrice());
-                        item.put("supermarket", p.getMarketName());
+                var mercadonaService = new MercadonaQueryService("C:\\Users\\aadel\\Desktop\\GCID\\Tercero\\Segundo Cuatrimestre\\BDNR\\fitness-db\\market-comparator\\database.db");
+                var carrefourService = new CarrefourQueryService("C:\\Users\\aadel\\Desktop\\GCID\\Tercero\\Segundo Cuatrimestre\\BDNR\\fitness-db\\market-comparator\\database.db");
 
-                        productos.add(item);
+                // ✅ Mercadona
+                var mercadonaResults = mercadonaService.searchMercadonaProduct(keyword);
+                for (var p : mercadonaResults) {
+                    Map<String, Object> item = new HashMap<>();
+                    item.put("name", p.getName());
+                    item.put("price", p.getPrice());
+                    item.put("supermarket", p.getMarketName());
+                    if (p instanceof MercadonaProductDTO mercadonaProd) {
+                        item.put("unitSize", mercadonaProd.getUnitSize());
                     }
-                    categorias = new MercadonaQueryService("C:\\Users\\aadel\\Desktop\\GCID\\Tercero\\Segundo Cuatrimestre\\BDNR\\fitness-db\\market-comparator\\database.db").getCategoriesForNameSearch_Mercadona(keyword);
-                } else if ("carrefour".equalsIgnoreCase(market)) {
-                    var results = new CarrefourQueryService("C:\\Users\\aadel\\Desktop\\GCID\\Tercero\\Segundo Cuatrimestre\\BDNR\\fitness-db\\market-comparator\\database.db").searchCarrefourByName(keyword);
-                    for (var p : results) {
-                        Map<String, Object> item = new HashMap<>();
-                        item.put("name", p.getName());
-                        item.put("price", p.getPrice());
-                        item.put("supermarket", p.getMarketName());
-
-                        productos.add(item);
-                    }
-                    categorias = new CarrefourQueryService("C:\\Users\\aadel\\Desktop\\GCID\\Tercero\\Segundo Cuatrimestre\\BDNR\\fitness-db\\market-comparator\\database.db").getCategoriesForNameSearch_Carrefour(keyword);
+                    mercadonaProductos.add(item);
                 }
+
+                var mercadonaCategorias = mercadonaService.getCategoriesForNameSearch_Mercadona(keyword);
+                for (String cat : mercadonaCategorias) {
+                    Map<String, Object> catMap = new HashMap<>();
+                    catMap.put("name", cat);
+                    catMap.put("url", "/filtrar?market=mercadona&keyword=" + keyword + "&category=" + cat);
+                    mercadonaCategoriasModel.add(catMap);
+                }
+
+                // ✅ Carrefour
+                var carrefourResults = carrefourService.searchCarrefourByName(keyword);
+                for (var p : carrefourResults) {
+                    Map<String, Object> item = new HashMap<>();
+                    item.put("name", p.getName());
+                    item.put("price", p.getPrice());
+                    item.put("supermarket", p.getMarketName());
+                    carrefourProductos.add(item);
+                }
+
+                var carrefourCategorias = carrefourService.getCategoriesForNameSearch_Carrefour(keyword);
+                for (String cat : carrefourCategorias) {
+                    Map<String, Object> catMap = new HashMap<>();
+                    catMap.put("name", cat);
+                    catMap.put("url", "/filtrar?market=carrefour&keyword=" + keyword + "&category=" + cat);
+                    carrefourCategoriasModel.add(catMap);
+                }
+
             } catch (Exception e) {
                 e.printStackTrace();
                 res.status(500);
@@ -140,22 +159,26 @@ public class Main {
 
             Map<String, Object> model = new HashMap<>();
             model.put("keyword", keyword);
-            model.put("market", market);
-            model.put("productos", productos);
 
-            // Convertimos las categorías a una lista de objetos para Mustache
-            List<Map<String, Object>> categoriasModel = new ArrayList<>();
-            for (String cat : categorias) {
-                Map<String, Object> catMap = new HashMap<>();
-                catMap.put("name", cat);
-                catMap.put("url", "/filtrar?market=" + market + "&keyword=" + keyword + "&category=" + cat);
-                categoriasModel.add(catMap);
-            }
+            List<Map<String, Object>> supermercados = new ArrayList<>();
+            supermercados.add(Map.of(
+                    "nombre", "Mercadona",
+                    "id", "mercadona-row",
+                    "productos", mercadonaProductos,
+                    "categorias", mercadonaCategoriasModel
+            ));
+            supermercados.add(Map.of(
+                    "nombre", "Carrefour",
+                    "id", "carrefour-row",
+                    "productos", carrefourProductos,
+                    "categorias", carrefourCategoriasModel
+            ));
 
-            model.put("categorias", categoriasModel);
+            model.put("supermercados", supermercados);
 
             return new ModelAndView(model, "results.mustache");
         }, new MustacheTemplateEngine());
+
 
 
     }
