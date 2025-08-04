@@ -119,6 +119,8 @@ public class Main {
                     item.put("name", p.getName());
                     item.put("price", p.getPrice());
                     item.put("supermarket", p.getMarketName());
+                    item.put("imageUrl", p.getImageURL());
+
                     if (p instanceof MercadonaProductDTO mercadonaProd) {
                         item.put("unitSize", mercadonaProd.getUnitSize());
                     }
@@ -140,6 +142,7 @@ public class Main {
                     item.put("name", p.getName());
                     item.put("price", p.getPrice());
                     item.put("supermarket", p.getMarketName());
+                    item.put("imageUrl", p.getImageURL());
                     carrefourProductos.add(item);
                 }
 

@@ -17,6 +17,9 @@
 
     {{#productos}}
         <div class="producto-card">
+            {{#imageUrl}}
+                <img src="{{imageUrl}}" alt="{{name}}" class="producto-img">
+            {{/imageUrl}}
             <h3>{{name}}</h3>
             <p class="precio">{{price}} €</p>
             <p>Supermercado: {{supermarket}}</p>

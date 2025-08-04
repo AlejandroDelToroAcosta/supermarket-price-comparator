@@ -22,6 +22,10 @@
                 <div id="{{id}}" class="carrusel">
                     {{#productos}}
                         <div class="producto-card">
+                            {{#imageUrl}}
+                                <img src="{{imageUrl}}" alt="{{name}}" class="producto-img">
+                            {{/imageUrl}}
+
                             <h4>{{name}}</h4>
                             <p class="precio">{{price}} €</p>
                             {{#unitSize}}

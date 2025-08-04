@@ -6,8 +6,8 @@ public class MercadonaProductDTO extends ProductDTO{
 
     private double unitSize;
 
-    public MercadonaProductDTO(String name, double price, String marketName, Double unitSize) {
-        super(name, price, marketName);
+    public MercadonaProductDTO(String name, double price, String marketName, String imageURL, Double unitSize) {
+        super(name, price, marketName, imageURL);
         this.unitSize = unitSize;
     }
 

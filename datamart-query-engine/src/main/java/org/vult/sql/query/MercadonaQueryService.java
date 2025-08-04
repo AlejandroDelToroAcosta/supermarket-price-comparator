@@ -41,7 +41,7 @@ public class MercadonaQueryService {
     }
     public List<ProductDTO> searchMercadonaByNameAndCategory(String keyword, String category) throws SQLException {
         String sql = """
-        SELECT name, unit_price, supermarket, unit_size FROM mercadona_products
+        SELECT name, unit_price, supermarket, unit_size, image_url FROM mercadona_products
         WHERE LOWER(name) LIKE ? AND category_name = ?
     """;
         List<ProductDTO> results = new ArrayList<>();
@@ -59,14 +59,15 @@ public class MercadonaQueryService {
                 double price = rs.getDouble("unit_price");
                 String marketName = rs.getString("supermarket");
                 double size = rs.getDouble("unit_size");
-                results.add(new MercadonaProductDTO(name, price, marketName,size));
+                String imageURL = rs.getString("image_url");
+                results.add(new MercadonaProductDTO(name, price, marketName, imageURL, size));
             }
         }
         return results;
     }
     public List<ProductDTO> searchMercadonaProduct(String keyword) throws SQLException {
         List<ProductDTO> results = new ArrayList<>();
-        String sql = "SELECT name, unit_price, supermarket, unit_size FROM mercadona_products WHERE name LIKE ?";
+        String sql = "SELECT name, unit_price, supermarket, unit_size, image_url FROM mercadona_products WHERE name LIKE ?";
 
         try (Connection conn = connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -79,7 +80,8 @@ public class MercadonaQueryService {
                 double price = rs.getDouble("unit_price");
                 double size = rs.getDouble("unit_size");
                 String marketName = rs.getString("supermarket");
-                results.add(new MercadonaProductDTO(name, price, marketName,size));
+                String imageURL = rs.getString("image_url");
+                results.add(new MercadonaProductDTO(name, price, marketName,imageURL, size));
             }
         }
 
