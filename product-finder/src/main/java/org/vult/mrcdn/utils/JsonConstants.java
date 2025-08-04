@@ -15,4 +15,5 @@ public class JsonConstants {
     public static final String URL = "share_url";
     public static final String FORMAT = "size_format";
     public static final String PACKAGING = "packaging";
+    public static final String IMAGE = "thumbnail";
 }

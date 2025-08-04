@@ -32,6 +32,7 @@ public class CSVReader {
                         record.get("Slug"),
                         record.get("Packaging"),
                         record.get("URL"),
+                        record.get("ImageURL"),
                         record.get("Supermarket")
                 );
                 products.add(p);

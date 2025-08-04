@@ -10,9 +10,11 @@ public class Product {
     private double unitSize;
     private String format;
     private String slug;
+    private String image;
 
+    public Product(double unitPrice, String displayName, Category category, String productId, String packaging,
+                   String url, double unitSize, String format, String slug, String image) {
 
-    public Product(double unitPrice, String displayName, Category category, String productId, String packaging, String url, double unitSize, String format, String slug) {
         this.unitPrice = unitPrice;
         this.displayName = displayName;
         this.category = category;
@@ -22,6 +24,7 @@ public class Product {
         this.unitSize = unitSize;
         this.format = format;
         this.slug = slug;
+        this.image = image;
     }
 
     public String getProductId() {
@@ -97,6 +100,13 @@ public class Product {
         this.displayName = displayName;
     }
 
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
 
     @Override
     public String toString() {
@@ -110,6 +120,7 @@ public class Product {
                 ", unitSize=" + unitSize +
                 ", format='" + format + '\'' +
                 ", slug='" + slug + '\'' +
+                ", image='" + image + '\'' +
                 '}';
     }
 }

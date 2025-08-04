@@ -65,13 +65,16 @@ public class ProductMapProvider implements ProductProvider{
                 String productId = getSafeString(jsonProduct, JsonConstants.PRODUCT_ID);
                 String packaging = getSafeString(jsonProduct, JsonConstants.PACKAGING);
                 String shareUrl = getSafeString(jsonProduct, JsonConstants.URL);
+                String image = getSafeString(jsonProduct,JsonConstants.IMAGE);
 
                 JsonObject priceInstructions = jsonProduct.getAsJsonObject("price_instructions");
                 float unitPrice = getSafeFloat(priceInstructions, JsonConstants.UNIT_PRICE);
                 double unitSize = getSafeDouble(priceInstructions, JsonConstants.UNIT_SIZE);
                 String format = getSafeString(priceInstructions, JsonConstants.FORMAT);
 
-                Product finalProduct = new Product(unitPrice, displayName, category, productId, packaging, shareUrl, unitSize, format, slug);
+                Product finalProduct = new Product(unitPrice, displayName, category, productId, packaging, shareUrl,
+                        unitSize, format, slug, image);
+
                 productArrayList.add(finalProduct);
             }
 

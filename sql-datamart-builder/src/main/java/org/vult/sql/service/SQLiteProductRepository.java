@@ -31,8 +31,8 @@ public class SQLiteProductRepository {
         String sql = """
                     INSERT OR REPLACE INTO mercadona_products (
                         product_id, name, unit_price, category_name, category_id, 
-                        format, unit_size, slug, packaging, url, supermarket
-                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                        format, unit_size, slug, packaging, url, supermarket, image_url
+                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                 """;
 
         try (Connection conn = connect();
@@ -48,7 +48,8 @@ public class SQLiteProductRepository {
                 pstmt.setString(8, p.getSlug());
                 pstmt.setString(9, p.getPackaging());
                 pstmt.setString(10, p.getUrl());
-                pstmt.setString(11,p.getMarketName());
+                pstmt.setString(11,p.getImageURL());
+                pstmt.setString(12,p.getMarketName());
                 pstmt.addBatch();
             }
             pstmt.executeBatch();

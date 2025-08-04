@@ -17,11 +17,11 @@ public class DatamartBuilder {
             repo.initializeSchema();
 
             CSVReader reader = new CSVReader();
-            List<CarrefourProduct> carrefourProducts = reader.readCarrefourCSV(carrefourCSV);
-            //List<MercadonaProduct> mercadonaProducts = reader.readMercadonaCSV(mercadonaCSV);
+            //List<CarrefourProduct> carrefourProducts = reader.readCarrefourCSV(carrefourCSV);
+            List<MercadonaProduct> mercadonaProducts = reader.readMercadonaCSV(mercadonaCSV);
 
-            repo.insertCarrefourProducts(carrefourProducts, "carrefour_products");
-            //repo.insertMercadonaProducts(mercadonaProducts);
+            //repo.insertCarrefourProducts(carrefourProducts, "carrefour_products");
+            repo.insertMercadonaProducts(mercadonaProducts);
 
             System.out.println("Datamart creado correctamente.");
         } catch (Exception e) {

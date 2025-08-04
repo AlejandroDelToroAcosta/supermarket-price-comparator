@@ -26,7 +26,8 @@ public class SQLSchema {
         slug TEXT,
         packaging TEXT,
         url TEXT,
-        supermarket TEXT
+        supermarket TEXT,
+        image_url TEXT
     );
     """;
 }

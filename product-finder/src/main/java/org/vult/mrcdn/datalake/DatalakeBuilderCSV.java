@@ -11,12 +11,12 @@ import java.util.Locale;
 public class DatalakeBuilderCSV {
     public void write(List<Product> products, String filePath) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
-            writer.write("ProductId,DisplayName,UnitPrice,CategoryName,CategoryId,Format,UnitSize,Slug,Packaging,URL");
+            writer.write("ProductId,DisplayName,UnitPrice,CategoryName,CategoryId,Format,UnitSize,Slug,Packaging,URL,ImageURL");
             writer.newLine();
 
             for (Product p : products) {
                 String line = String.format(Locale.US,
-                        "\"%s\",\"%s\",%.2f,\"%s\",%d,\"%s\",%.2f,\"%s\",\"%s\",\"%s\"",
+                        "\"%s\",\"%s\",%.2f,\"%s\",%d,\"%s\",%.2f,\"%s\",\"%s\",\"%s\",\"%s\"",
                         escape(p.getProductId()),
                         escape(p.getDisplayName()),
                         p.getUnitPrice(),
@@ -26,7 +26,8 @@ public class DatalakeBuilderCSV {
                         p.getUnitSize(),
                         escape(p.getSlug()),
                         escape(p.getPackaging()),
-                        escape(p.getUrl())
+                        escape(p.getUrl()),
+                        escape(p.getImage())
                 );
                 writer.write(line);
                 writer.newLine();
