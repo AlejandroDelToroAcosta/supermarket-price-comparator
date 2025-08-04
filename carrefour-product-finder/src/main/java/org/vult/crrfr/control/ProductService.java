@@ -30,6 +30,7 @@ public class ProductService {
         List<Product> products = new ArrayList<>();
 
         for (Category category : filteredCats) {
+            System.out.println(category);
             try {
                 List<Product> productosCategoria = provider.getProduct(category);
                 products.addAll(productosCategoria);

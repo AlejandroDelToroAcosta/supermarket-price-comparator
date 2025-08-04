@@ -16,7 +16,7 @@ public class DatalakeBuilderCSV {
         try (
                 BufferedWriter writer = new BufferedWriter(new FileWriter(filePath));
                 CSVPrinter csvPrinter = new CSVPrinter(writer, CSVFormat.DEFAULT
-                        .withHeader("DisplayName", "UnitPrice", "Unit", "URL", "ProductID", "CategoryID"))
+                        .withHeader("DisplayName", "UnitPrice", "Unit", "URL", "ProductID", "CategoryID", "ImageURL"))
         ) {
             for (Product p : productList) {
                 csvPrinter.printRecord(
@@ -25,7 +25,8 @@ public class DatalakeBuilderCSV {
                         p.getMeasureUnit(),
                         p.getUrl(),
                         p.getProductId(),
-                        p.getCategory().getCategoryID()
+                        p.getCategory().getCategoryID(),
+                        p.getImageURL()
                 );
             }
             csvPrinter.flush();

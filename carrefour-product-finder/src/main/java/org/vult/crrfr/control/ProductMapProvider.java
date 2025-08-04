@@ -74,11 +74,14 @@ public class ProductMapProvider implements ProductProvider {
                 String priceWithoutComa = newPrice.replace(",", ".");
                 float finalPrice = Float.parseFloat(priceWithoutComa);
 
+                JsonObject images = obj.get("images").getAsJsonObject();
+                String imageURL = images.get("mobile").getAsString();
+
                 String productId = obj.has(JsonConstants.PRODUCT_ID) ? obj.get(JsonConstants.PRODUCT_ID).getAsString() : "N/A";
                 String url = obj.has(JsonConstants.URL) ? obj.get(JsonConstants.URL).getAsString() : "";
                 String measureUnit = obj.has(JsonConstants.MEASURE_UNIT) ? obj.get(JsonConstants.MEASURE_UNIT).getAsString() : "";
 
-                Product product = new Product(name, finalPrice, measureUnit, url, productId,category);
+                Product product = new Product(name, finalPrice, measureUnit, url, productId,category,imageURL);
                 products.add(product);
 
             }

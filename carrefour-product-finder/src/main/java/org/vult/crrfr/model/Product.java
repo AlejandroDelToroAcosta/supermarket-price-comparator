@@ -1,7 +1,5 @@
 package org.vult.crrfr.model;
 
-import kotlin.text.UStringsKt;
-
 public class Product {
     private String name;
     private double price;
@@ -9,14 +7,16 @@ public class Product {
     private String url;
     private String productId;
     private Category category;
+    private String imageURL;
 
-    public Product(String name, double price, String measureUnit, String url, String productId, Category category) {
+    public Product(String name, double price, String measureUnit, String url, String productId, Category category, String imageURL) {
         this.name = name;
         this.price = price;
         this.measureUnit = measureUnit;
         this.url = url;
         this.productId = productId;
         this.category = category;
+        this.imageURL = imageURL;
     }
 
     public double getPrice() {
@@ -24,6 +24,14 @@ public class Product {
     }
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public String getImageURL() {
+        return imageURL;
+    }
+
+    public void setImageURL(String imageURL) {
+        this.imageURL = imageURL;
     }
 
     public String getProductId() {
@@ -76,6 +84,7 @@ public class Product {
                 ", url='" + url + '\'' +
                 ", productId='" + productId + '\'' +
                 ", category=" + category +
+                ", imageURL='" + imageURL + '\'' +
                 '}';
     }
 }

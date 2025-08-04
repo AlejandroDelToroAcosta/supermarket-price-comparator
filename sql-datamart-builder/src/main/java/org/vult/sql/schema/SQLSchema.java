@@ -10,6 +10,7 @@ public class SQLSchema {
         url TEXT,
         category_id TEXT,
         category TEXT,
+        image_url TEXT,
         supermarket TEXT
     );
     """;

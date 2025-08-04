@@ -10,8 +10,9 @@ public class CarrefourProduct {
     private String categoryID;
     private String category;
     private String marketName;
+    private String imageURL;
 
-    public CarrefourProduct(String name, double price, String measureUnit, String url, String productId, String categoryID, String category, String marketName) {
+    public CarrefourProduct(String name, double price, String measureUnit, String url, String productId, String categoryID, String category, String marketName, String imageURL) {
         this.name = name;
         this.price = price;
         this.measureUnit = measureUnit;
@@ -20,6 +21,15 @@ public class CarrefourProduct {
         this.categoryID = categoryID;
         this.category = category;
         this.marketName = marketName;
+        this.imageURL = imageURL;
+    }
+
+    public String getImageURL() {
+        return imageURL;
+    }
+
+    public void setImageURL(String imageURL) {
+        this.imageURL = imageURL;
     }
 
     public String getCategoryID() {
@@ -85,6 +95,7 @@ public class CarrefourProduct {
     public void setMarketName(String marketName) {
         this.marketName = marketName;
     }
+
 
     @Override
     public String toString() {

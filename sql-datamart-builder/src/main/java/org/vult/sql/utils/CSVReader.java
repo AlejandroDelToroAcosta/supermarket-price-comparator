@@ -55,7 +55,8 @@ public class CSVReader {
                         record.get("ProductID"),
                         record.get("CategoryID"),
                         record.get("Category"),
-                        record.get("Supermarket")
+                        record.get("Supermarket"),
+                        record.get("ImageURL")
                 );
                 products.add(p);
             }

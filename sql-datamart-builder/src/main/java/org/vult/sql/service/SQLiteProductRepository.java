@@ -59,8 +59,8 @@ public class SQLiteProductRepository {
     public void insertCarrefourProducts(List<CarrefourProduct> products, String tableName) throws SQLException {
         String sql = String.format("""
             INSERT OR REPLACE INTO %s 
-            (product_id, name, unit_price, unit, url, category_id, category, supermarket)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+            (product_id, name, unit_price, unit, url, category_id, category, image_url, supermarket)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
         """, tableName);
 
         try (Connection conn = connect();
@@ -73,7 +73,8 @@ public class SQLiteProductRepository {
                 pstmt.setString(5, p.getUrl());
                 pstmt.setString(6, p.getCategoryID());
                 pstmt.setString(7, p.getCategory());
-                pstmt.setString(8,p.getMarketName());
+                pstmt.setString(8,p.getImageURL());
+                pstmt.setString(9,p.getMarketName());
                 pstmt.addBatch();
             }
             pstmt.executeBatch();
