@@ -9,7 +9,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.Gson;
 
 import static org.vult.mrcdn.utils.JsonUtils.*;
-import org.vult.mrcdn.utils.HttpClient;
+import org.vult.mrcdn.utils.HTTPClient;
 import org.vult.mrcdn.utils.JsonConstants;
 import org.vult.mrcdn.model.Category;
 import org.vult.mrcdn.model.Product;
@@ -20,7 +20,7 @@ public class ProductMapProvider implements ProductProvider{
     public List<Category> getCategory(String url) throws IOException {
 
         ArrayList<Category> categoryArrayList = new ArrayList<>();
-        String json = HttpClient.get(url);
+        String json = HTTPClient.get(url);
         Gson gson = new Gson();
         JsonObject jsonObject = gson.fromJson(json, JsonObject.class);
 
@@ -45,7 +45,7 @@ public class ProductMapProvider implements ProductProvider{
 
     public List<Product> getProduct(String url) throws IOException {
         ArrayList<Product> productArrayList = new ArrayList<>();
-        String json = HttpClient.get(url);
+        String json = HTTPClient.get(url);
         Gson gson = new Gson();
         JsonObject jsonObject = gson.fromJson(json, JsonObject.class);
         JsonArray jsonCategories = jsonObject.getAsJsonArray("categories");
@@ -82,7 +82,7 @@ public class ProductMapProvider implements ProductProvider{
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
-                throw new IOException("Proceso interrumpido durante la espera", e);
+                throw new IOException(e);
             }
         }
 

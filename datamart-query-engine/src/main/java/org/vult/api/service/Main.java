@@ -12,18 +12,18 @@ import java.util.*;
 public class Main {
     private static final List<Map<String, Object>> productosGuardados = new ArrayList<>();
 
+
     public static void main(String[] args) {
 
         staticFiles.location("/public");
         exception(Exception.class, (e, req, res) -> {
-            e.printStackTrace(); // ✅ Verás el error real en consola
+            e.printStackTrace();
             res.status(500);
             res.body("Error interno del servidor: " + e.getMessage());
         });
 
 
 
-        // Ruta principal con el formulario
         get("/", (req, res) -> {
             return new ModelAndView(new HashMap<>(), "index.mustache");
         }, new MustacheTemplateEngine());
@@ -37,7 +37,7 @@ public class Main {
 
             try {
                 if ("mercadona".equalsIgnoreCase(market)) {
-                    var results = new MercadonaQueryService("C:\\Users\\aadel\\Desktop\\GCID\\Tercero\\Segundo Cuatrimestre\\BDNR\\fitness-db\\market-comparator\\database.db").searchMercadonaByNameAndCategory(keyword, category);
+                    var results = new MercadonaQueryService(args[0]).searchMercadonaByNameAndCategory(keyword, category);
                     for (var p : results) {
                         Map<String, Object> item = new HashMap<>();
                         item.put("name", p.getName());
@@ -49,7 +49,7 @@ public class Main {
                         productos.add(item);
                     }
                 } else {
-                    var results = new CarrefourQueryService("C:\\Users\\aadel\\Desktop\\GCID\\Tercero\\Segundo Cuatrimestre\\BDNR\\fitness-db\\market-comparator\\database.db").searchCarrefourByNameAndCategory(keyword, category);
+                    var results = new CarrefourQueryService(args[0]).searchCarrefourByNameAndCategory(keyword, category);
                     for (var p : results) {
                         Map<String, Object> item = new HashMap<>();
                         item.put("name", p.getName());
@@ -77,7 +77,7 @@ public class Main {
             String name = req.queryParams("name");
             String price = req.queryParams("price");
             String marketName = req.queryParams("supermarket");
-            String unitSize = req.queryParams("unitSize"); // puede ser null
+            String unitSize = req.queryParams("unitSize");
 
             Map<String, Object> producto = new HashMap<>();
             producto.put("name", name);
@@ -109,10 +109,9 @@ public class Main {
             List<Map<String, Object>> carrefourCategoriasModel = new ArrayList<>();
 
             try {
-                var mercadonaService = new MercadonaQueryService("C:\\Users\\aadel\\Desktop\\GCID\\Tercero\\Segundo Cuatrimestre\\BDNR\\fitness-db\\market-comparator\\database.db");
-                var carrefourService = new CarrefourQueryService("C:\\Users\\aadel\\Desktop\\GCID\\Tercero\\Segundo Cuatrimestre\\BDNR\\fitness-db\\market-comparator\\database.db");
+                var mercadonaService = new MercadonaQueryService(args[0]);
+                var carrefourService = new CarrefourQueryService(args[0]);
 
-                // ✅ Mercadona
                 var mercadonaResults = mercadonaService.searchMercadonaProduct(keyword);
                 for (var p : mercadonaResults) {
                     Map<String, Object> item = new HashMap<>();
@@ -135,7 +134,7 @@ public class Main {
                     mercadonaCategoriasModel.add(catMap);
                 }
 
-                // ✅ Carrefour
+
                 var carrefourResults = carrefourService.searchCarrefourByName(keyword);
                 for (var p : carrefourResults) {
                     Map<String, Object> item = new HashMap<>();
@@ -181,8 +180,6 @@ public class Main {
 
             return new ModelAndView(model, "results.mustache");
         }, new MustacheTemplateEngine());
-
-
 
     }
 }

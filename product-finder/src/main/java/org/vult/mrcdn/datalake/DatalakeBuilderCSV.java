@@ -40,6 +40,6 @@ public class DatalakeBuilderCSV {
 
     private String escape(String value) {
         if (value == null) return "Na";
-        return value.replace("\"", "\"\""); // duplica las comillas internas
+        return value.replace("\"", "\"\"");
     }
 }

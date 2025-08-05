@@ -7,23 +7,29 @@ import org.vult.sql.utils.CSVReader;
 import java.util.List;
 
 public class DatamartBuilder {
-    public void execute() {
-        String dbPath = "C:\\Users\\aadel\\Desktop\\GCID\\Tercero\\Segundo Cuatrimestre\\BDNR\\fitness-db\\market-comparator\\database.db";
-        String carrefourCSV = "C:\\Users\\aadel\\Desktop\\market-comparator\\new-carrefour-data.csv";
+    private final String dbPath;
+    private final String carrefourCSVPath;
+    private final String mercadonaCSVPath;
 
-        //String mercadonaCSV = "C:\\Users\\aadel\\Desktop\\market-comparator\\new-mercadona-data.csv";
+    public DatamartBuilder(String dbPath, String carrefourCSVPath, String mercadonaCSVPath) {
+        this.dbPath = dbPath;
+        this.carrefourCSVPath = carrefourCSVPath;
+        this.mercadonaCSVPath = mercadonaCSVPath;
+    }
+
+    public void execute() {
+
         try {
             SQLiteProductRepository repo = new SQLiteProductRepository(dbPath);
             repo.initializeSchema();
 
             CSVReader reader = new CSVReader();
-            List<CarrefourProduct> carrefourProducts = reader.readCarrefourCSV(carrefourCSV);
-            //List<MercadonaProduct> mercadonaProducts = reader.readMercadonaCSV(mercadonaCSV);
+            List<CarrefourProduct> carrefourProducts = reader.readCarrefourCSV(carrefourCSVPath);
+            List<MercadonaProduct> mercadonaProducts = reader.readMercadonaCSV(mercadonaCSVPath);
 
             repo.insertCarrefourProducts(carrefourProducts, "carrefour_products");
-           // repo.insertMercadonaProducts(mercadonaProducts);
+            repo.insertMercadonaProducts(mercadonaProducts);
 
-            System.out.println("Datamart creado correctamente.");
         } catch (Exception e) {
             e.printStackTrace();
         }

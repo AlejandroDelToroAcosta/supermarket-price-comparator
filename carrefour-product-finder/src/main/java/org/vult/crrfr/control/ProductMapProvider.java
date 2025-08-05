@@ -8,7 +8,7 @@ import com.google.gson.JsonObject;
 import org.vult.crrfr.utils.JsonConstants;
 import org.vult.crrfr.model.Category;
 import org.vult.crrfr.model.Product;
-import org.vult.crrfr.utils.HttpClient;
+import org.vult.crrfr.utils.HTTPClient;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -17,7 +17,7 @@ import java.util.List;
 public class ProductMapProvider implements ProductProvider {
 
     public List<Category> getCategory(String url) throws IOException {
-        String json = HttpClient.get(url);
+        String json = HTTPClient.get(url);
         Gson gson = new Gson();
         JsonObject jsonObject = gson.fromJson(json, JsonObject.class);
 
@@ -48,13 +48,13 @@ public class ProductMapProvider implements ProductProvider {
             String productUrl = "https://www.carrefour.es/cloud-api/plp-food-papi/v1" + category.getUrl() +
                     "?offset=" + offset;
 
-            String json = HttpClient.get(productUrl);
+            String json = HTTPClient.get(productUrl);
             Gson gson = new Gson();
             JsonObject jsonObject = gson.fromJson(json, JsonObject.class);
 
             JsonObject results = jsonObject.getAsJsonObject("results");
             if (results == null || !results.has("items")) {
-                System.out.println("Categoría vacía o malformada: " + category.getUrl());
+                System.out.println("Error in category: " + category.getUrl());
                 break;
             }            JsonArray itemsArray = results.getAsJsonArray("items");
 
@@ -93,7 +93,7 @@ public class ProductMapProvider implements ProductProvider {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
-                throw new IOException("Proceso interrumpido durante la espera", e);
+                throw new IOException(e);
             }
 
         }

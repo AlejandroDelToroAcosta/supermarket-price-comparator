@@ -5,7 +5,7 @@ import okhttp3.Request;
 import okhttp3.Response;
 import java.io.IOException;
 
-public class HttpClient {
+public class HTTPClient {
 
     private static final OkHttpClient client = new OkHttpClient();
 

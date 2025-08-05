@@ -19,7 +19,6 @@ public class CarrefourQueryService {
         return DriverManager.getConnection("jdbc:sqlite:" + dbPath);
     }
 
-    // 🔍 Buscar productos por nombre
     public List<ProductDTO> searchCarrefourByName(String keyword) throws SQLException {
         List<ProductDTO> results = new ArrayList<>();
         String sql = "SELECT name, unit_price, image_url, supermarket FROM carrefour_products WHERE name LIKE ?";
