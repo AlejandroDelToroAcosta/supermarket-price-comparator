@@ -14,10 +14,8 @@ The system fetches products, builds a **Data Lake** and a **Data Mart**, and ser
 6. [Database Schema](#database-schema)
 7. [API Documentation](#api-documentation)
 8. [Example Usage](#example-usage)
-9. [Development & Testing](#development--testing)
-10. [Project Structure](#project-structure)
-11. [Future Improvements](#future-improvements)
-12. [License](#license)
+9. [Project Structure](#project-structure)
+10. [Future Improvements](#future-improvements)
 
 ---
 
@@ -178,20 +176,8 @@ curl "http://localhost:4567/filtrar?market=carrefour&keyword=milk&category=Dairy
 
 ---
 
-## 9. Development & Testing
 
-Run tests:
-```bash
-mvn test
-```
 
-Check DB content manually:
-```bash
-sqlite3 database.db
-sqlite> SELECT name, unit_price FROM carrefour_products LIMIT 5;
-```
-
----
 
 ## 10. Project Structure
 ```
@@ -223,9 +209,5 @@ market-comparator/
 
 ---
 
-## 12. License
-This project is licensed under the [MIT License](LICENSE).
-
----
 
 **For detailed technical documentation, database diagrams, and scraping strategy, see [`docs/`](docs/).**
