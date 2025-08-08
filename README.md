@@ -209,5 +209,3 @@ market-comparator/
 
 ---
 
-
-**For detailed technical documentation, database diagrams, and scraping strategy, see [`docs/`](docs/).**
